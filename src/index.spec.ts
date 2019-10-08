@@ -47,6 +47,29 @@ describe('Object to form data', () => {
 
             expect(formData.append).toHaveBeenCalledWith('foo', file);
         })
+
+        it('will append a blob', () => {
+
+            const blob = new Blob();
+
+            objectToFormData({
+                foo: blob,
+            }, {}, formData);
+
+            expect(formData.append).toHaveBeenCalledWith('foo', blob);
+        })
+    });
+
+    describe('null', () => {
+
+        it('will append a null value', () => {
+
+            objectToFormData({
+                foo: null,
+            }, { excludeNull: false }, formData);
+
+            expect(formData.append).toHaveBeenCalledWith('foo', '');
+        })
     });
 
     describe('boolean', () => {
@@ -65,7 +88,7 @@ describe('Object to form data', () => {
             expect(formData.append).toHaveBeenCalledWith('bar', 'false');
             expect(formData.append).toHaveBeenCalledWith('baz[boolean]', 'false');
         })
-    })
+    });
 
     describe('array', () => {
 
@@ -79,14 +102,14 @@ describe('Object to form data', () => {
                     2,
                     3
                 ]
-            }, {}, formData);
+            }, { }, formData);
 
             expect(formData.append).toHaveBeenCalledWith('foo', 'true');
             expect(formData.append).toHaveBeenCalledWith('bar', 'false');
             expect(formData.append).toHaveBeenCalledWith('baz[0]', 1);
             expect(formData.append).toHaveBeenCalledWith('baz[1]', 2);
             expect(formData.append).toHaveBeenCalledWith('baz[2]', 3);
-        })
+        });
 
 
         it('will append array of objects', () => {
