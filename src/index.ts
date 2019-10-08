@@ -1,10 +1,10 @@
 import isObject from 'lodash/isObject';
+import isArray from 'lodash/isArray';
 import {Options} from "./models/Options";
 
 const isBlob = value => value instanceof Blob;
 const isFile = value => value instanceof File;
 const isBoolean = value => typeof value === 'boolean';
-const isArray = value => Array.isArray(value);
 const isNull = value => value === null;
 const isUndefined = value => value === undefined;
 
@@ -13,7 +13,7 @@ const processData = (value: any, options: Options, formData: FormData, parent?: 
 
     if (isNull(value) || isUndefined(value)) {
         if(!options.excludeNull){
-            formData.append(processedKey, value);
+            formData.append(processedKey, '');
         }
         return;
     }
@@ -25,6 +25,14 @@ const processData = (value: any, options: Options, formData: FormData, parent?: 
 
     if (isBlob(value)) {
         formData.append(processedKey, value);
+        return;
+    }
+
+    if (isArray(value)) {
+        value.forEach((item, index) => {
+            const computedKey = `${processedKey}[${options.arrayIndexes ? index : ''}]`;
+            processData(item, options, formData, computedKey);
+        });
         return;
     }
 
@@ -41,14 +49,6 @@ const processData = (value: any, options: Options, formData: FormData, parent?: 
         return;
     }
 
-    if (isArray(value)) {
-        value.forEach((item, index) => {
-            const computedKey = `${processedKey}[${options.arrayIndexes ? index : ''}]`;
-            processData(item, options, formData, computedKey);
-        });
-        return;
-    }
-
     formData.append(processedKey, value);
 };
 
@@ -61,7 +61,7 @@ export const objectToFormData = (payload: any, options: Partial<Options> = {}, f
 
     if (!payload) return formData;
 
-    options = Object.assign(options, defaultOptions);
+    options = Object.assign(defaultOptions, options);
 
     return processData(payload, options as Options, formData);
 

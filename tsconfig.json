@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "declaration": true,
+    "allowJs": false,
+    "sourceMap": true,
+    "noUnusedLocals": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "noUnusedParameters": false,
+    "pretty": true,
+    "noFallthroughCasesInSwitch": true,
+    "allowUnreachableCode": false,
+    "experimentalDecorators": true,
+    "skipLibCheck": true,
+    "target": "es5",
+    "module": "es6",
+    "moduleResolution": "node",
+    "esModuleInterop": true
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
+  ]
+}
