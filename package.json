@@ -1,9 +1,9 @@
 {
   "name": "@ajoelp/json-to-formdata",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "",
   "scripts": {
-    "test": "jest --coverage",
+    "test": "jest",
     "build": "microbundle",
     "dev": "microbundle watch"
   },
