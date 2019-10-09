@@ -57,7 +57,7 @@ const defaultOptions: Options = {
     excludeNull: true,
 };
 
-export const objectToFormData = (payload: any, options: Partial<Options> = {}, formData: FormData = new FormData) => {
+const objectToFormData = (payload: any, options: Partial<Options> = {}, formData: FormData = new FormData) => {
 
     if (!payload) return formData;
 
@@ -66,3 +66,5 @@ export const objectToFormData = (payload: any, options: Partial<Options> = {}, f
     return processData(payload, options as Options, formData);
 
 };
+
+export default objectToFormData;
