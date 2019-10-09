@@ -1,4 +1,4 @@
-import {objectToFormData} from "./index";
+import objectToFormData from "./index";
 
 const formData = new FormData();
 
