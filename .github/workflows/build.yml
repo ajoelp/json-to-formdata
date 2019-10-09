@@ -28,8 +28,28 @@ jobs:
       env:
         CI: true
 
-    - name: npm publish
-      run: npm publish
-      if: github.ref == 'refs/heads/master'
-      env:
+  publish:
+
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Use Node.js 10.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 10.x
+          registry-url: https://registry.npmjs.org/
+
+      - name: npm install, build, and test
+        run: |
+          npm ci
+          npm test
+          npm run build --if-present
+        env:
+          CI: true
+
+      - name: npm publish
+        run: npm publish
+        if: github.ref == 'refs/heads/master'
+        env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
