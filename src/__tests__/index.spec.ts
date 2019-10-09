@@ -1,4 +1,5 @@
-import objectToFormData from "./index";
+import objectToFormData from "../index";
+import {payload,result} from "../__mocks__/stress.mock";
 
 const formData = new FormData();
 
@@ -66,7 +67,7 @@ describe('Object to form data', () => {
 
             objectToFormData({
                 foo: null,
-            }, { excludeNull: false }, formData);
+            }, {excludeNull: false}, formData);
 
             expect(formData.append).toHaveBeenCalledWith('foo', '');
         })
@@ -102,7 +103,7 @@ describe('Object to form data', () => {
                     2,
                     3
                 ]
-            }, { }, formData);
+            }, {}, formData);
 
             expect(formData.append).toHaveBeenCalledWith('foo', 'true');
             expect(formData.append).toHaveBeenCalledWith('bar', 'false');
@@ -131,4 +132,57 @@ describe('Object to form data', () => {
             expect(formData.append).toHaveBeenCalledWith('baz[2][id]', 3);
         })
     });
+
+    describe('fields', () => {
+        const file = new File([], '');
+        const blob = new Blob();
+        const dataProvider = [
+            ['boolean', true, 'true'],
+            ['!boolean', false, 'false'],
+            ['string', 'test', 'test'],
+            ['number', 12, '12'],
+            ['file', file, file],
+            ['blob', blob, file],
+            ['object', {}, null],
+            ['boolean', [], null],
+        ];
+
+        it.each<any[]>(dataProvider)("receives a %s (%s, %s)", (type, payload, result) => {
+
+            const formDataObj = objectToFormData({foo: payload}, {});
+
+            expect(formDataObj.get('foo')).toEqual(result)
+
+        })
+    });
+
+    describe('formData', () => {
+
+        it('will return a formData object', () => {
+
+            const payload = {
+                test: 'foo',
+                bar: 'baz'
+            };
+
+            const formDataObj = objectToFormData(payload, {});
+
+            for (const c of formDataObj.keys()) {
+                expect(formDataObj.get(c)).toEqual(payload[c]);
+            }
+
+        })
+
+    })
+
+    describe('stress', () => {
+        it('will stress test', async () => {
+            const a = objectToFormData(payload, {});
+            for (const data of result as any){
+                const [key, value] = data;
+                expect(a.get(key)).toEqual(value);
+            }
+        })
+    });
+
 });
