@@ -1,14 +1,31 @@
 {
   "name": "@ajoelp/json-to-formdata",
-  "version": "0.1.1",
-  "description": "",
+  "version": "1.0.0",
+  "description": "Convert json data to a FormData object",
+  "keywords": [
+    "formdata",
+    "form",
+    "data",
+    "form-data",
+    "object",
+    "json",
+    "json-to-formdata"
+  ],
+  "homepage": "https://github.com/ajoelp/json-to-formdata#readme",
   "scripts": {
     "test": "jest",
     "build": "microbundle",
     "dev": "microbundle watch"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Joel Podrebarac <joelpodrebar@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ajoelp/json-to-formdata.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ajoelp/json-to-formdata/issues"
+  },
   "dependencies": {
     "jest": "^24.9.0",
     "lodash": "^4.17.15"
