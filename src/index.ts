@@ -63,7 +63,9 @@ const objectToFormData = (payload: any, options: Partial<Options> = {}, formData
 
     options = Object.assign(defaultOptions, options);
 
-    return processData(payload, options as Options, formData);
+    processData(payload, options as Options, formData);
+
+    return formData;
 
 };
 
