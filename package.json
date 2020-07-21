@@ -1,6 +1,6 @@
 {
   "name": "@ajoelp/json-to-formdata",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Convert json data to a FormData object",
   "keywords": [
     "formdata",
