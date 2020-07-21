@@ -1,4 +1,4 @@
-export interface Options {
+export default interface Options {
     arrayIndexes: boolean,
     excludeNull: boolean,
-}
+};

@@ -15,7 +15,9 @@
   "scripts": {
     "test": "jest",
     "build": "microbundle",
-    "dev": "microbundle watch"
+    "dev": "microbundle watch",
+    "lint": "eslint \"src/**.ts\"",
+    "lint-fix": "eslint \"src/**.ts\" --fix"
   },
   "author": "Joel Podrebarac <joelpodrebar@gmail.com>",
   "license": "MIT",
@@ -27,20 +29,20 @@
     "url": "https://github.com/ajoelp/json-to-formdata/issues"
   },
   "dependencies": {
-    "jest": "^24.9.0",
-    "lodash": "^4.17.15"
+    "lodash": "4.17.19"
   },
   "devDependencies": {
-    "@babel/core": "^7.6.2",
-    "@babel/preset-env": "^7.6.2",
-    "@types/jest": "^24.0.18",
-    "@typescript-eslint/eslint-plugin": "^2.3.3",
-    "@typescript-eslint/parser": "^2.3.3",
-    "eslint": "^6.5.1",
-    "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-plugin-import": "^2.18.2",
-    "microbundle": "^0.11.0",
-    "ts-jest": "^24.1.0"
+    "@babel/core": "7.10.5",
+    "@babel/preset-env": "7.10.4",
+    "@types/jest": "26.0.5",
+    "@typescript-eslint/eslint-plugin": "3.7.0",
+    "@typescript-eslint/parser": "3.7.0",
+    "eslint": "7.5.0",
+    "eslint-config-airbnb-base": "14.2.0",
+    "eslint-plugin-import": "2.22.0",
+    "jest": "26.1.0",
+    "microbundle": "0.12.3",
+    "ts-jest": "26.1.3"
   },
   "source": "src/index.ts",
   "main": "dist/index.js",
