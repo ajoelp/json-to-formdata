@@ -29,7 +29,7 @@
     "url": "https://github.com/ajoelp/json-to-formdata/issues"
   },
   "dependencies": {
-    "lodash": "4.17.19"
+    "lodash": "4.17.21"
   },
   "devDependencies": {
     "@babel/core": "7.10.5",
