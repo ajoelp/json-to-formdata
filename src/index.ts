@@ -8,6 +8,7 @@ const isBoolean = (value) => typeof value === 'boolean';
 const isNull = (value) => value === null;
 const isUndefined = (value) => value === undefined;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const processData = (value: any, options: Options, formData: FormData, parent?: string) => {
   const processedKey = parent || '';
 
@@ -63,6 +64,7 @@ const defaultOptions: Options = {
   useDotSeparator: false,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const objectToFormData = (payload: any, options: Partial<Options> = {}, formData: FormData = new FormData()) => {
   if (!payload) return formData;
 

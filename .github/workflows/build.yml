@@ -22,9 +22,9 @@ jobs:
 
     - name: npm install, build, and test
       run: |
-        npm ci
-        npm test
-        npm run build --if-present
+        yarn install
+        yarn test
+        yarn build
       env:
         CI: true
 
@@ -42,9 +42,9 @@ jobs:
 
       - name: npm install, build, and test
         run: |
-          npm ci
-          npm test
-          npm run build --if-present
+          yarn install
+          yarn test
+          yarn build
         env:
           CI: true
 

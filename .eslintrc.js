@@ -1,24 +1,40 @@
+const parserOptions = {
+  ecmaFeatures: {
+    jsx: true,
+  },
+  ecmaVersion: 2020,
+  sourceType: 'module',
+};
+
+const rules = {
+  "@typescript-eslint/explicit-module-boundary-types": "off"
+}
+
 module.exports = {
   env: {
     browser: true,
-    es6: true,
-    node: true,
+    es2020: true,
+    jest: true,
   },
-  extends: [
-    'airbnb-base',
-  ],
+  extends: ['standard', 'prettier'],
   globals: {
-    Atomics: 'readonly',
-    SharedArrayBuffer: 'readonly',
+    Sfdc: 'readonly',
+    JSX: 'readonly',
   },
-  parser: '@typescript-eslint/parser',
-  parserOptions: {
-    ecmaVersion: 2018,
-    sourceType: 'module',
-  },
-  plugins: [
-    '@typescript-eslint',
+  parserOptions,
+  rules,
+  overrides: [
+    {
+      files: ['**/*.ts', '**/*.tsx'],
+      extends: [
+        'standard',
+        'plugin:@typescript-eslint/recommended',
+        'prettier',
+      ],
+      plugins: ['@typescript-eslint'],
+      parser: '@typescript-eslint/parser',
+      parserOptions,
+      rules
+    },
   ],
-  rules: {
-  },
 };
