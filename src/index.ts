@@ -38,7 +38,12 @@ const processData = (value: any, options: Options, formData: FormData, parent?: 
 
   if (isObject(value)) {
     Object.entries(value).forEach(([key, data]) => {
-      const computedKey = parent ? `${parent}[${key}]` : key;
+      let computedKey = key;
+      if (parent) {
+        computedKey = options.useDotSeparator
+          ? `${parent}.${key}`
+          : `${parent}[${key}]`;
+      }
       processData(data, options, formData, computedKey);
     });
     return;
@@ -55,6 +60,7 @@ const processData = (value: any, options: Options, formData: FormData, parent?: 
 const defaultOptions: Options = {
   arrayIndexes: true,
   excludeNull: true,
+  useDotSeparator: false,
 };
 
 const objectToFormData = (payload: any, options: Partial<Options> = {}, formData: FormData = new FormData()) => {
