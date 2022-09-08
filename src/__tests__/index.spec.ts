@@ -83,7 +83,7 @@ describe('Object to form data', () => {
                 baz: {
                     boolean: false
                 }
-            }, {}, formData);
+            }, {useBrackets: true}, formData);
 
             expect(formData.append).toHaveBeenCalledWith('foo', 'true');
             expect(formData.append).toHaveBeenCalledWith('bar', 'false');
@@ -103,7 +103,7 @@ describe('Object to form data', () => {
                     2,
                     3
                 ]
-            }, {}, formData);
+            }, {useBrackets: true}, formData);
 
             expect(formData.append).toHaveBeenCalledWith('foo', 'true');
             expect(formData.append).toHaveBeenCalledWith('bar', 'false');
@@ -111,6 +111,48 @@ describe('Object to form data', () => {
             expect(formData.append).toHaveBeenCalledWith('baz[1]', 2);
             expect(formData.append).toHaveBeenCalledWith('baz[2]', 3);
         });
+
+        it('will not show brackets', () => {
+
+            objectToFormData({
+                foo:[
+                    "bar",
+                    12,
+                    true,
+                ],
+                bar: null
+            }, {useBrackets: false}, formData);
+
+            expect(formData.append).toHaveBeenCalledWith('foo', 'bar');
+            expect(formData.append).toHaveBeenCalledWith('foo', 12);
+            expect(formData.append).toHaveBeenCalledWith('foo', 'true');
+            //expect(formData.append).to('foo', 'true');
+        })
+
+        it('will not show brackets with a nested object', () => {
+
+            objectToFormData({
+                foo:[
+                    "bar",
+                    12,
+                ],
+                baz: {
+                    "x": [5, 6],
+                    "y": {
+                        "a": [1, 2],
+                        "b": [3]
+                    }
+                }
+            }, {useBrackets: false}, formData);
+
+            expect(formData.append).toHaveBeenCalledWith('foo', 'bar');
+            expect(formData.append).toHaveBeenCalledWith('foo', 12);
+            expect(formData.append).toHaveBeenCalledWith('baz[x]', 5);
+            expect(formData.append).toHaveBeenCalledWith('baz[x]', 6);
+            expect(formData.append).toHaveBeenCalledWith('baz[y][a]', 1);
+            expect(formData.append).toHaveBeenCalledWith('baz[y][a]', 2);
+            expect(formData.append).toHaveBeenCalledWith('baz[y][b]', 3);
+        })
 
 
         it('will append array of objects', () => {

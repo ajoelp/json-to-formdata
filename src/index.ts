@@ -31,7 +31,10 @@ const processData = (value: any, options: Options, formData: FormData, parent?: 
 
   if (isArray(value)) {
     value.forEach((item, index) => {
-      const computedKey = `${processedKey}[${options.arrayIndexes ? index : ''}]`;
+      let computedKey = processedKey;
+      if(options.useBrackets){
+        computedKey += `[${options.arrayIndexes ? index : ''}]`
+      }
       processData(item, options, formData, computedKey);
     });
     return;
@@ -62,6 +65,7 @@ const defaultOptions: Options = {
   arrayIndexes: true,
   excludeNull: true,
   useDotSeparator: false,
+  useBrackets: true
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
