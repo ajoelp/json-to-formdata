@@ -68,7 +68,7 @@ const defaultOptions: Options = {
 const objectToFormData = (payload: any, options: Partial<Options> = {}, formData: FormData = new FormData()) => {
   if (!payload) return formData;
 
-  options = Object.assign(defaultOptions, options);
+  options = Object.assign({}, defaultOptions, options);
 
   processData(payload, options as Options, formData);
 
