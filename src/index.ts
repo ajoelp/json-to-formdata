@@ -54,7 +54,12 @@ const processData = (value: any, options: Options, formData: FormData, parent?: 
   }
 
   if (isBoolean(value)) {
-    formData.append(processedKey, value ? 'true' : 'false');
+    if (options.booleanAsNumbers) {
+      formData.append(processedKey, `${Number(value)}`);
+    } else {
+      formData.append(processedKey, value ? 'true' : 'false');
+    }
+
     return;
   }
 
@@ -65,7 +70,8 @@ const defaultOptions: Options = {
   arrayIndexes: true,
   excludeNull: true,
   useDotSeparator: false,
-  useBrackets: true
+  useBrackets: true,
+  booleanAsNumbers: false,
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

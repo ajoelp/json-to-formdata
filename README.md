@@ -1,5 +1,5 @@
 # JSON to FormData
->Convert json data to a FormData object
+> Convert json data to a FormData object
 
 ## Install
 
@@ -12,7 +12,6 @@ $ npm i @ajoelp/json-to-formdata
 ## Usage
 
 ```javascript
-
 // Using ES6
 import jsonToFormData from '@ajoelp/json-to-formdata';
 
@@ -22,13 +21,13 @@ const jsonToFormData = require('@ajoelp/json-to-formdata');
 // Use the package
 const formData = jsonToFormData({
   foo: 'bar',
-  bar: 'baz'
+  bar: 'baz',
 });
 
 // With options
 const formData = jsonToFormData({
   foo: 'bar',
-  bar: 'baz'
+  bar: 'baz',
 }, {
   // Add indexes to arrays
   arrayIndexes: true,
@@ -42,14 +41,10 @@ formData.append('key', 'value');
 
 jsonToFormData({
   foo: 'bar',
-  bar: 'baz'
+  bar: 'baz',
 }, {}, formData);
-
 ```
 
 ## License
 
 [MIT License](https://opensource.org/licenses/MIT) © [Joel Podrebarac](https://joelpodrebarac.me/)
-
-
-
