@@ -76,7 +76,6 @@ describe('Object to form data', () => {
     describe('boolean', () => {
 
         it('will append boolean', () => {
-
             objectToFormData({
                 foo: true,
                 bar: false,
@@ -88,6 +87,20 @@ describe('Object to form data', () => {
             expect(formData.append).toHaveBeenCalledWith('foo', 'true');
             expect(formData.append).toHaveBeenCalledWith('bar', 'false');
             expect(formData.append).toHaveBeenCalledWith('baz[boolean]', 'false');
+        })
+
+        it('will append boolean as a number', () => {
+            objectToFormData({
+                foo: true,
+                bar: false,
+                baz: {
+                    boolean: false
+                }
+            }, { useBrackets: true, booleanAsNumbers: true }, formData);
+
+            expect(formData.append).toHaveBeenCalledWith('foo', '1');
+            expect(formData.append).toHaveBeenCalledWith('bar', '0');
+            expect(formData.append).toHaveBeenCalledWith('baz[boolean]', '0');
         })
     });
 

@@ -3,4 +3,5 @@ export default interface Options {
     excludeNull: boolean,
     useDotSeparator: boolean,
     useBrackets: boolean
+    booleanAsNumbers: boolean
 };
